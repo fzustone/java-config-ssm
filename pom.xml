@@ -10,7 +10,6 @@
 	<packaging>war</packaging>
 
 
-
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- spring版本号 -->
@@ -24,6 +23,12 @@
 		<fastJson.version>1.2.61</fastJson.version>
 	</properties>
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/jstl/jstl -->
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
 
 		<!-- spring核心包 -->
 		<dependency>
@@ -83,7 +88,11 @@
 			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>28.1-jre</version>
+		</dependency>
 		<!--SQL-->
 		<!-- mybatis-plus 代替Mybats -->
 		<dependency>
@@ -174,11 +183,7 @@
 			<version>1.18.6</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>28.1-jre</version>
-		</dependency>
+
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>

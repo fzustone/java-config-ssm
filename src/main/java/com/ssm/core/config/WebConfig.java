@@ -1,6 +1,8 @@
 package com.ssm.core.config;
 
 import com.google.common.collect.Lists;
+import com.ssm.controller.HelloWorldController;
+import com.ssm.controller.IndexController;
 import com.ssm.core.interceptor.InitContextInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -12,9 +14,12 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping;
+import org.springframework.web.servlet.handler.SimpleUrlHandlerMapping;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import java.util.List;
+import java.util.Properties;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
@@ -35,7 +40,8 @@ public class WebConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(initContextInterceptor());
+		registry.addInterceptor(initContextInterceptor())
+				.addPathPatterns("/**");
 	}
 
 	@Bean
@@ -45,14 +51,14 @@ public class WebConfig implements WebMvcConfigurer {
 
 	@Override
 	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-		converters.add(new MappingJackson2HttpMessageConverter());
+		converters.add(converter());
 
 	}
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/")
-				.setViewName("index");
+				.setViewName("forward:/index");
 	}
 
 	@Bean
@@ -68,6 +74,32 @@ public class WebConfig implements WebMvcConfigurer {
 		MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
 		mappingJackson2HttpMessageConverter.setSupportedMediaTypes(Lists.newArrayList(APPLICATION_JSON));
 		return mappingJackson2HttpMessageConverter;
+	}
+
+	@Bean
+	public SimpleUrlHandlerMapping simpleUrlHandlerMapping() {
+		SimpleUrlHandlerMapping mapping = new SimpleUrlHandlerMapping();
+		mapping.setOrder(-100);
+
+		Properties urlProperties = new Properties();
+		urlProperties.put("/helloGuest", "helloGuestController");
+		mapping.setMappings(urlProperties);
+		return mapping;
+	}
+
+	@Bean
+	public IndexController helloGuestController() {
+		return new IndexController();
+	}
+
+	@Bean
+	public BeanNameUrlHandlerMapping beanNameUrlHandlerMapping() {
+		return new BeanNameUrlHandlerMapping();
+	}
+
+	@Bean("/welcome")
+	public HelloWorldController helloWorldController() {
+		return new HelloWorldController();
 	}
 
 }

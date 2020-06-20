@@ -23,6 +23,7 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 		super.onStartup(servletContext);
 		//防止spring内存溢出监听器，比如quartz
 		servletContext.addListener(IntrospectorCleanupListener.class);
+		servletContext.getServletRegistration("jsp").addMapping("*.html");
 
 		FilterRegistration.Dynamic encodingFilter = servletContext.addFilter("encodingFilter",
 				CharacterEncodingFilter.class);
