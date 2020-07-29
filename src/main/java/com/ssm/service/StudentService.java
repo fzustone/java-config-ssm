@@ -19,4 +19,8 @@ public class StudentService {
 		return studentMapper.selectByPrimaryKey(id);
 
 	}
+
+	public void save(Student student) {
+		//do nothing
+	}
 }

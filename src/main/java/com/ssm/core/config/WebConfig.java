@@ -2,7 +2,7 @@ package com.ssm.core.config;
 
 import com.google.common.collect.Lists;
 import com.ssm.controller.HelloWorldController;
-import com.ssm.controller.IndexController;
+import com.ssm.controller.TestSimpleUrlHandlerController;
 import com.ssm.core.interceptor.InitContextInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -88,8 +88,8 @@ public class WebConfig implements WebMvcConfigurer {
 	}
 
 	@Bean
-	public IndexController helloGuestController() {
-		return new IndexController();
+	public TestSimpleUrlHandlerController helloGuestController() {
+		return new TestSimpleUrlHandlerController();
 	}
 
 	@Bean
