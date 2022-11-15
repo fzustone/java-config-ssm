@@ -19,7 +19,7 @@
 		<!-- log4j日志文件管理包版本 -->
 		<slf4j.version>1.7.29</slf4j.version>
 		<log4j.version>2.12.1</log4j.version>
-		<jackSon.version>2.10.0</jackSon.version>
+		<jackSon.version>2.12.7.1</jackSon.version>
 		<fastJson.version>1.2.61</fastJson.version>
 	</properties>
 	<dependencies>
